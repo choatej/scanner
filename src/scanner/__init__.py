@@ -1,3 +1,51 @@
 """Scanner package."""
 
-__all__ = []
+from .domain.engine import (
+    ListFailureAggregator,
+    NormalizerRegistry,
+    OutputRegistry,
+    PersistenceRegistry,
+    ProcessingEngine,
+    RegistryError,
+    SourceRegistry,
+)
+from .domain.models import (
+    IngestionRecord,
+    OutputDescriptor,
+    OutputFormat,
+    OutputPayload,
+    PersistenceBackendType,
+    PersistenceDescriptor,
+    PersistenceResult,
+    ProcessingReport,
+    ProcessingRequest,
+    SourceDescriptor,
+    SourceRecord,
+    SourceStructure,
+    SourceType,
+    VideoMetadata,
+)
+
+__all__ = [
+    "IngestionRecord",
+    "ListFailureAggregator",
+    "NormalizerRegistry",
+    "OutputDescriptor",
+    "OutputFormat",
+    "OutputPayload",
+    "OutputRegistry",
+    "PersistenceBackendType",
+    "PersistenceDescriptor",
+    "PersistenceRegistry",
+    "PersistenceResult",
+    "ProcessingEngine",
+    "ProcessingReport",
+    "ProcessingRequest",
+    "RegistryError",
+    "SourceDescriptor",
+    "SourceRecord",
+    "SourceRegistry",
+    "SourceStructure",
+    "SourceType",
+    "VideoMetadata",
+]

@@ -52,14 +52,14 @@ dev-dependencies = [
 ]
 
 [tool.black]
-line-length = 100
+line-length = 120
 target-version = ["py312"]
 include = '\.pyi?$'
 skip-magic-trailing-comma = false
 
 [tool.isort]
 profile = "black"
-line_length = 100
+line_length = 120
 known_first_party = ["scanner"]
 combine_as_imports = true
 
@@ -82,7 +82,7 @@ no_implicit_optional = true
 plugins = []
 
 [tool.flake8]
-max-line-length = 100
+max-line-length = 120
 extend-ignore = [
   "E203",
   "W503",

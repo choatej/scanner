@@ -12,6 +12,14 @@ _Last updated: 2025-11-08_
 - **Domain Layer (`src/scanner/domain`)**: Houses core business logic, metadata models, and workflows.
 - **Infrastructure Layer (`src/scanner/infrastructure`)**: Manages integrations such as databases, web scrapers, and external services.
 
+### Processing Engine
+- **Source abstraction**: `SourceType` enum captures high-level categories (web pages, files, databases, APIs).
+- **Structure descriptors**: `SourceDescriptor` and `SourceStructure` describe specific integrations such as YouTube pages or CSV files.
+- **Normalization step**: `SourceRecord` and `IngestionRecord` form the boundary between raw data and normalized `VideoMetadata`.
+- **Output configuration**: `OutputDescriptor` and `OutputPayload` shape how normalized data is emitted (normalized metadata, raw payloads, summaries).
+- **Persistence backend**: `PersistenceDescriptor` paired with `PersistenceBackend` interfaces route payloads to storage layers (files, databases, queues, remote APIs).
+- **Processing engine orchestration**: `ProcessingEngine` coordinates registries for source adapters, normalizers, transformers, and persistence backends, capturing failures via a pluggable aggregator.
+
 ## Tooling and Standards
 - Python 3.12 base runtime with virtual environment managed locally at `.venv/`.
 - Development tooling stack: uv, pytest, mypy, import-linter, black, bandit, flake8.
