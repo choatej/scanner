@@ -73,7 +73,7 @@ Any credentials persisted need to be secure - either read from a secure vault-li
 # Continuous Integration
 - GitHub pull request creation and updates will trigger a run of all static analysis and tests. It will also create a docker container and push it to ghcr.io.
 - Merges to main will trigger a release creating all deployment artifacts.
-- 
+-
 
 ## Deployment
 Scripts are provided to run Scanner

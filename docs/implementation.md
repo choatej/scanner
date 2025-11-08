@@ -19,6 +19,8 @@ _Last updated: 2025-11-08_
 - `tests/test_json_codec.py`: Exercises JSON serialization helpers.
 - `tests/test_json_file_source.py`: Verifies the JSON file source adapter and end-to-end engine integration.
 - `scripts/`: Development helper scripts (`bootstrap.sh`, `activate.sh`, `lint.sh`, `format.sh`).
+- `.pre-commit-config.yaml`: Local hook configuration running `scripts/lint-fix.sh` alongside basic hygiene checks.
+- `.github/workflows/ci.yml`: Continuous integration pipeline executing the full lint and test suite on PRs, pushes to `main`, and manual dispatch.
 - `.venv/`: Local virtual environment (ignored by git).
 
 ## Tooling Configuration
@@ -33,8 +35,7 @@ _Last updated: 2025-11-08_
 - Scaffold REST/GraphQL API endpoints.
 - Expand coverage for error scenarios (retry semantics, partial persistence) and introduce integration tests with concrete adapters.
 - Wire structured logging through adapters and persistence backends, ensuring correlation IDs for multi-source ingestion.
+- Extend CI jobs with caching and artifact publishing (coverage reports, mypy caches) for faster feedback loops.
 - Add additional source adapters (HTML, API) alongside persistence backends, reusing the JSON utilities for fixture-based testing.
 
 This document will capture implementation progress and decisions as the project evolves.
-
-

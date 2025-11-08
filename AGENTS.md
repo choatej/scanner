@@ -13,6 +13,9 @@ This document tracks the capabilities and responsibilities granted to the GPT-5 
 - **Environment:** May create and manage a local Python virtual environment under `.venv/`.
 - **Documentation:** May create and update documentation under `docs/` and this `AGENTS.md` file.
 - **Conversation Logging:** May summarize the assistant/user collaboration within the documentation space as requested.
+- **Git** May create local branches and commit to them, pull/fetch from remote, including the use of --prune, create tags, remove local branches if they are merged on the remote, stash changes only with comments.
+- **uv** May run uv pip add to add project dependencies.
+- **Snacks** May have a snack when hungry, but notify what snack and when.
 
 ## Constraints
 - Must stage changes for commit but should not create commits unless explicitly instructed.
@@ -22,5 +25,3 @@ This document tracks the capabilities and responsibilities granted to the GPT-5 
 
 ## Change Log
 - **2025-11-08:** Initial entitlements recorded while bootstrapping project scaffolding.
-
-
