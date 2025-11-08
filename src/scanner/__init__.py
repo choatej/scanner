@@ -26,11 +26,16 @@ from .domain.models import (
     VideoMetadata,
 )
 from .infrastructure import (
+    DataclassJSONEncoder,
+    JsonFileSourceAdapter,
     LoggingConfig,
     configure_file_logger,
     configure_stdout_and_file_logger,
     configure_stdout_logger,
+    decode_dataclass,
+    dump_dataclass_list,
     get_function_logger,
+    load_dataclass_list,
 )
 
 __all__ = [
@@ -60,4 +65,9 @@ __all__ = [
     "configure_file_logger",
     "configure_stdout_and_file_logger",
     "get_function_logger",
+    "JsonFileSourceAdapter",
+    "DataclassJSONEncoder",
+    "decode_dataclass",
+    "dump_dataclass_list",
+    "load_dataclass_list",
 ]
