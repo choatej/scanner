@@ -53,10 +53,11 @@ jobs:
         run: bandit -r src
         continue-on-error: true
 
-      - name: Run import-linter
-        id: import_linter
-        run: import-linter lint
-        continue-on-error: true
+      # uncomment when import-linter is configured
+      # - name: Run import-linter
+      #   id: import_linter
+      #   run: lint-imports
+      #   continue-on-error: true
 
       - name: Summarize lint results
         if: always()
