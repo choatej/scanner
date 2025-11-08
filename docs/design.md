@@ -33,5 +33,3 @@ _Last updated: 2025-11-08_
 4. Query interfaces expose aggregated metadata through REST/GraphQL APIs and programmatic clients.
 
 Further detail will be added as components are implemented.
-
-

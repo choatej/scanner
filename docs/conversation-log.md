@@ -10,7 +10,6 @@ _This document summarizes key interactions between the user and GPT-5 Codex duri
 - Implemented processing engine abstractions (source descriptors, normalization, output, persistence) and orchestrating engine skeleton with registry pattern.
 - Added unit tests validating processing engine flow and error handling for unsupported sources.
 - Introduced reusable logging utilities in `scanner.infrastructure.logging_config`, integrated structured logging into the processing engine, and validated helpers with targeted tests.
+- Added local pre-commit integration (running `scripts/lint-fix.sh`) and configured GitHub Actions CI to execute linting and test suites on key events.
 
 Additional entries will be added as new discussions influence implementation decisions.
-
-
