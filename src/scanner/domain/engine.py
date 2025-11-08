@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from typing import Iterable, Sequence
 
@@ -111,14 +112,24 @@ class ProcessingEngine:
         output_registry: OutputRegistry,
         persistence_registry: PersistenceRegistry,
         failure_aggregator: FailureAggregator | None = None,
+        logger: logging.Logger | None = None,
     ) -> None:
         self._source_registry = source_registry
         self._normalizer_registry = normalizer_registry
         self._output_registry = output_registry
         self._persistence_registry = persistence_registry
         self._failure_aggregator = failure_aggregator or ListFailureAggregator()
+        self._logger = logger or logging.getLogger(__name__)
 
     def process(self, request: ProcessingRequest) -> ProcessingReport:
+        self._logger.info(
+            "Starting processing request",
+            extra={
+                "source": request.source.identifier,
+                "output_format": request.output.format.name,
+                "persistence_target": request.persistence.target,
+            },
+        )
         adapter = self._source_registry.resolve(request.source)
         normalizer = self._normalizer_registry.resolve(request.source)
         transformer = self._output_registry.resolve(request.output)
@@ -126,6 +137,10 @@ class ProcessingEngine:
 
         raw_records = list(self._safe_read(adapter, request.source))
         ingestion_records = list(self._normalize(raw_records, normalizer))
+        self._logger.debug(
+            "Normalization complete",
+            extra={"count": len(ingestion_records)},
+        )
         output_payloads = self._transform(
             ingestion_records,
             transformer,
@@ -137,6 +152,14 @@ class ProcessingEngine:
         )
 
         failures = self._failure_aggregator.snapshot()
+        self._logger.info(
+            "Processing completed",
+            extra={
+                "ingested": len(ingestion_records),
+                "persisted": persistence_result.stored_count,
+                "failures": len(failures),
+            },
+        )
         return ProcessingReport(
             ingested=len(ingestion_records),
             persisted=persistence_result.stored_count,
@@ -176,5 +199,9 @@ class ProcessingEngine:
         except Exception as exc:  # noqa: BLE001
             self._failure_aggregator.record(
                 f"Transformation failure: {exc}",
+            )
+            self._logger.exception(
+                "Transformation error",
+                extra={"output_format": descriptor.format.name},
             )
             return []
