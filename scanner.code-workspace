@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../../crawler"
+		},
+		{
+			"path": "../../search-collector"
 		}
 	],
 	"settings": {}

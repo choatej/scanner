@@ -7,5 +7,3 @@ exclude =
     build,
     dist,
     .venv
-
-

@@ -42,5 +42,3 @@ else
 fi
 
 echo "Environment bootstrap complete."
-
-

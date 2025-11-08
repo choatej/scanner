@@ -11,5 +11,3 @@ fi
 shell_bin="${SHELL:-/bin/bash}"
 echo "Activating virtual environment at ${VENV_DIR} using ${shell_bin}"
 source "${VENV_DIR}/bin/activate"
-
-
