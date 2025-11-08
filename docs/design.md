@@ -19,6 +19,7 @@ _Last updated: 2025-11-08_
 - **Output configuration**: `OutputDescriptor` and `OutputPayload` shape how normalized data is emitted (normalized metadata, raw payloads, summaries).
 - **Persistence backend**: `PersistenceDescriptor` paired with `PersistenceBackend` interfaces route payloads to storage layers (files, databases, queues, remote APIs).
 - **Processing engine orchestration**: `ProcessingEngine` coordinates registries for source adapters, normalizers, transformers, and persistence backends, capturing failures via a pluggable aggregator.
+- **Logging strategy**: `scanner.infrastructure.logging_config` provides consistent stdout/file logger setup mirroring lessons from earlier projects; the engine accepts a logger for observability.
 
 ## Tooling and Standards
 - Python 3.12 base runtime with virtual environment managed locally at `.venv/`.

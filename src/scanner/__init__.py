@@ -25,6 +25,13 @@ from .domain.models import (
     SourceType,
     VideoMetadata,
 )
+from .infrastructure import (
+    LoggingConfig,
+    configure_file_logger,
+    configure_stdout_and_file_logger,
+    configure_stdout_logger,
+    get_function_logger,
+)
 
 __all__ = [
     "IngestionRecord",
@@ -48,4 +55,9 @@ __all__ = [
     "SourceStructure",
     "SourceType",
     "VideoMetadata",
+    "LoggingConfig",
+    "configure_stdout_logger",
+    "configure_file_logger",
+    "configure_stdout_and_file_logger",
+    "get_function_logger",
 ]
