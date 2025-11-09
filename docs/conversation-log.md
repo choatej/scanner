@@ -15,5 +15,6 @@ _This document summarizes key interactions between the user and GPT-5 Codex duri
 - Added JSON Lines persistence backend and CLI command to demonstrate end-to-end ingestion with accompanying tests.
 - Introduced PostgreSQL persistence backend (with schema helpers) and documented roadmap for future milestones.
 - Added Dockerfile and docker-compose stack to orchestrate Scanner alongside PostgreSQL.
+- Implemented HTML ingestion pipeline (requests/Selenium fetchers, BeautifulSoup DOM adapter, configurable field extraction) with fixtures and tests.
 
 Additional entries will be added as new discussions influence implementation decisions.

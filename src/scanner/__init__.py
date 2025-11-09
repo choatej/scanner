@@ -32,6 +32,7 @@ from .domain.models import (
 )
 from .infrastructure import (
     DataclassJSONEncoder,
+    HtmlPageSourceAdapter,
     JsonFileSourceAdapter,
     JsonLinesPersistenceBackend,
     LoggingConfig,
@@ -78,6 +79,7 @@ __all__ = [
     "configure_stdout_and_file_logger",
     "get_function_logger",
     "JsonFileSourceAdapter",
+    "HtmlPageSourceAdapter",
     "DataclassJSONEncoder",
     "decode_dataclass",
     "dump_dataclass_list",

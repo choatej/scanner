@@ -3,8 +3,8 @@
 This roadmap outlines the planned feature progression for Scanner. Each iteration builds on the existing abstractions (source adapters → normalization → persistence → APIs) to expand coverage and capabilities.
 
 ## Milestone 1 — Web Ingestion Pipeline
-- Implement HTML/scraper-based source adapters (static pages, pagination, Selenium for dynamic content).
-- Add configuration for source-specific parameters (rate limits, timeouts).
+- ✅ Implement HTML/scraper-based source adapters (static pages, optional Selenium rendering).
+- Add configuration for source-specific parameters (rate limits, pagination).
 - Provide basic error handling, retry logic, and structured logging extensions.
 
 ## Milestone 2 — Relational Persistence
