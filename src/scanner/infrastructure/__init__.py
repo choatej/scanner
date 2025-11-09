@@ -19,6 +19,7 @@ from .persistence.postgres import (
     ensure_schema as ensure_pg_schema,
     reset_schema as reset_pg_schema,
 )
+from .sources.html_page import HtmlPageSourceAdapter
 from .sources.json_file import JsonFileSourceAdapter
 
 __all__ = [
@@ -32,6 +33,7 @@ __all__ = [
     "dump_dataclass_list",
     "load_dataclass_list",
     "JsonFileSourceAdapter",
+    "HtmlPageSourceAdapter",
     "JsonLinesPersistenceBackend",
     "PostgresPersistenceBackend",
     "ensure_pg_schema",

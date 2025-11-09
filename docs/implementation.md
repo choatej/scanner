@@ -13,7 +13,9 @@ _Last updated: 2025-11-08_
 - `src/scanner/domain/transformers.py`: Output transformers such as `NormalizedMetadataTransformer`.
 - `src/scanner/infrastructure/logging_config.py`: Reusable logging utilities enabling stdout, file, or combined handlers.
 - `src/scanner/infrastructure/json_codec.py`: Dataclass-friendly JSON helpers.
+- `src/scanner/infrastructure/html/`: HTML helpers (`fetchers`, BeautifulSoup DOM adapter).
 - `src/scanner/infrastructure/sources/json_file.py`: Source adapter that reads local JSON metadata.
+- `src/scanner/infrastructure/sources/html_page.py`: HTML page adapter configurable via CSS selectors.
 - `src/scanner/infrastructure/persistence/jsonl.py`: Persistence backend writing JSON Lines output.
 - `src/scanner/infrastructure/persistence/postgres.py`: PostgreSQL backend with `sites`/`videos` tables and schema helpers.
 - `src/scanner/api/cli.py`: Lightweight CLI entrypoint for ingesting a JSON file into JSONL output.
@@ -22,6 +24,7 @@ _Last updated: 2025-11-08_
 - `tests/test_logging_config.py`: Exercises logging helper utilities.
 - `tests/test_json_codec.py`: Exercises JSON serialization helpers.
 - `tests/test_json_file_source.py`: Verifies the JSON file source adapter and engine integration.
+- `tests/test_html_source_adapter.py`: Validates the HTML adapter against sample markup.
 - `tests/test_jsonl_persistence.py`: Ensures JSON Lines persistence backend writes expected data.
 - `tests/test_cli.py`: Runs the CLI end-to-end against fixture metadata.
 - `tests/test_postgres_persistence.py`: Integration test for the PostgreSQL backend (requires `TEST_PG_DATABASE_URL`).

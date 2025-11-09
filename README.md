@@ -7,6 +7,7 @@ The project is at an early prototype stage:
 - ✅ Python package scaffolding with processing engine, registries, and domain models.
 - ✅ JSON ingestion pipeline with CLI (`scanner-ingest`) that reads structured metadata files and writes JSON Lines output.
 - ✅ PostgreSQL persistence backend (2-table schema) for normalized video metadata.
+- ✅ HTML ingestion adapter (requests/BeautifulSoup with optional Selenium) driven by configuration.
 - ✅ Tooling, tests, pre-commit hooks, and CI workflows.
 - 🚧 Upcoming milestones are tracked in `docs/roadmap.md`.
 
@@ -41,6 +42,20 @@ To exercise the PostgreSQL backend locally:
 ```bash
 export TEST_PG_DATABASE_URL="postgresql+psycopg://user:password@localhost:5432/scanner"
 pytest tests/test_postgres_persistence.py
+```
+
+To ingest HTML pages, prepare a source configuration (see `HtmlPageSourceAdapter`) and choose a persistence backend:
+
+```bash
+scanner-ingest \
+  --metadata-file /path/to/page.html \
+  --persistence-backend jsonl \
+  --output-file /tmp/videos.jsonl
+
+scanner-ingest \
+  --metadata-file https://example.com/videos \
+  --persistence-backend postgres \
+  --database-url postgresql+psycopg://scanner:scanner@localhost:5432/scanner
 ```
 
 ### Running with Docker Compose

@@ -23,6 +23,7 @@ _Last updated: 2025-11-08_
 - **Local JSON ingestion**: `JsonFileSourceAdapter` and `VideoMetadataNormalizer` load structured metadata from disk using dataclass-aware codecs.
 - **File persistence**: `JsonLinesPersistenceBackend` appends normalized payloads to JSON Lines files for inspection or downstream ingestion.
 - **Relational persistence**: `PostgresPersistenceBackend` stores metadata in PostgreSQL tables (`sites`, `videos`) with automatic schema management.
+- **HTML ingestion**: `HtmlPageSourceAdapter` orchestrates fetchers (requests/Selenium) and DOM parsing (BeautifulSoup) with configurable CSS selectors and field mappings.
 - **CLI workflow**: `scanner.api.cli` offers a simple command for executing the ingestion pipeline end-to-end.
 
 ## Tooling and Standards
