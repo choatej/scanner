@@ -14,7 +14,7 @@ from scanner.domain.models import (
 )
 from scanner.infrastructure.persistence.postgres import (
     PostgresPersistenceBackend,
-    ensure_schema,
+    _get_engine,
     reset_schema,
 )
 
@@ -60,7 +60,7 @@ def test_postgres_persistence_inserts_records(database_url: str, tmp_path: Path)
     # Verify inserted row count
     from sqlalchemy import text
 
-    engine = backend._get_engine(database_url)
+    engine = _get_engine(database_url)
     with engine.connect() as conn:
         count = conn.execute(text("SELECT COUNT(*) FROM videos")).scalar_one()
         assert count >= 1
