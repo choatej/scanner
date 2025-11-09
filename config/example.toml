@@ -1,0 +1,23 @@
+[source]
+adapter = "html_page"
+
+[source.configuration]
+start_urls = ["https://videos.example.com/latest"]
+item_selector = ".video"
+
+[source.configuration.fields.title]
+selector = ".title"
+
+[source.configuration.fields.description]
+selector = ".description"
+
+[source.configuration.fields.length_seconds]
+selector = ".length"
+
+[persistence]
+adapter = "postgres"
+
+[persistence.configuration]
+database_url = "postgresql+psycopg://scanner:scanner@postgres:5432/scanner"
+
+
