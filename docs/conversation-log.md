@@ -14,5 +14,6 @@ _This document summarizes key interactions between the user and GPT-5 Codex duri
 - Built JSON ingestion utilities (`json_codec`, `JsonFileSourceAdapter`, `VideoMetadataNormalizer`) with fixtures and engine integration tests.
 - Added JSON Lines persistence backend and CLI command to demonstrate end-to-end ingestion with accompanying tests.
 - Introduced PostgreSQL persistence backend (with schema helpers) and documented roadmap for future milestones.
+- Added Dockerfile and docker-compose stack to orchestrate Scanner alongside PostgreSQL.
 
 Additional entries will be added as new discussions influence implementation decisions.

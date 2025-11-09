@@ -29,6 +29,7 @@ _Last updated: 2025-11-08_
 - `.pre-commit-config.yaml`: Local hook configuration running `scripts/lint-fix.sh` alongside basic hygiene checks.
 - `.github/workflows/ci.yml`: Continuous integration pipeline executing the full lint and test suite on PRs, pushes to `main`, and manual dispatch.
 - `.venv/`: Local virtual environment (ignored by git).
+- `Dockerfile`, `docker-compose.yml`, `.dockerignore`: Containerized runtime and orchestration for Scanner + PostgreSQL.
 
 ## Tooling Configuration
 - `pyproject.toml`: Central configuration for packaging and tooling.

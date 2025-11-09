@@ -43,6 +43,27 @@ export TEST_PG_DATABASE_URL="postgresql+psycopg://user:password@localhost:5432/s
 pytest tests/test_postgres_persistence.py
 ```
 
+### Running with Docker Compose
+
+Docker resources live at the repository root (`Dockerfile`, `docker-compose.yml`). The default compose stack includes:
+
+- `postgres`: PostgreSQL 17 instance.
+- `scanner`: containerized CLI that ingests the sample metadata in `tests/fixtures/video_metadata.json` into Postgres.
+
+```bash
+docker compose up --build scanner
+```
+
+To ingest different metadata files, mount them and override the command:
+
+```bash
+docker compose run --rm \
+  -v "$(pwd)/my_data:/data" \
+  scanner \
+  --metadata-file /data/custom.json \
+  --persistence-backend postgres
+```
+
 ### Continuous Integration
 
 GitHub Actions run linting and tests on pull requests and merges to `main`. Branch protection requires passing CI, at least one review (including Copilot suggestions), and all conversations resolved before merging.

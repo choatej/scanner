@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: scanner
+      POSTGRES_USER: scanner
+      POSTGRES_PASSWORD: scanner
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  scanner:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql+psycopg://scanner:scanner@postgres:5432/scanner
+    volumes:
+      - ./tests/fixtures:/data
+    command:
+      [
+        "--metadata-file",
+        "/data/video_metadata.json",
+        "--persistence-backend",
+        "postgres",
+      ]
+
+volumes:
+  postgres-data:
+

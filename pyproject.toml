@@ -23,6 +23,8 @@ classifiers = [
 keywords = ["scanner", "metadata", "videos"]
 dependencies = [
     "mypy>=1.18.2",
+    "sqlalchemy>=2.0.32",
+    "psycopg[binary]>=3.1.19",
 ]
 
 [project.scripts]
