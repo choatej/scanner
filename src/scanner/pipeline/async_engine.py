@@ -27,9 +27,6 @@ from ..domain.models import (
     SourceRecord,
 )
 
-logger = logging.getLogger(__name__)
-
-
 class AsyncProcessingEngine:
     """Coordinate ingestion asynchronously using asyncio primitives."""
 
@@ -144,13 +141,15 @@ class AsyncProcessingEngine:
         normalizer: Normalizer,
         aggregator: FailureAggregator,
     ) -> list[IngestionRecord]:
-        normalized: list[IngestionRecord] = []
-        for record in records:
-            try:
-                normalized.append(normalizer.normalize(record))
-            except Exception as exc:  # noqa: BLE001
-                aggregator.record(f"Normalization failure: {exc}")
-        return normalized
+        def _normalize() -> list[IngestionRecord]:
+            normalized: list[IngestionRecord] = []
+            for record in records:
+                try:
+                    normalized.append(normalizer.normalize(record))
+                except Exception as exc:  # noqa: BLE001
+                    aggregator.record(f"Normalization failure: {exc}")
+            return normalized
+        return await asyncio.to_thread(_normalize)
 
     async def _transform_async(
         self,
