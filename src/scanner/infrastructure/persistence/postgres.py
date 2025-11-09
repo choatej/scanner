@@ -109,7 +109,7 @@ _ENGINE_CACHE: dict[str, Engine] = {}
 
 def _get_engine(url: str) -> Engine:
     if url not in _ENGINE_CACHE:
-        _ENGINE_CACHE[url] = create_engine(url, pool_pre_ping=True, future=True)
+        _ENGINE_CACHE[url] = create_engine(url, pool_pre_ping=True)
     return _ENGINE_CACHE[url]
 
 
