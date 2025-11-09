@@ -58,10 +58,9 @@ def test_postgres_persistence_inserts_records(database_url: str, tmp_path: Path)
     assert result.stored_count == 1
 
     # Verify inserted row count
-    from sqlalchemy import create_engine, text
+    from sqlalchemy import text
 
-    engine = create_engine(database_url)
-    ensure_schema(engine)
+    engine = backend._get_engine(database_url)
     with engine.connect() as conn:
         count = conn.execute(text("SELECT COUNT(*) FROM videos")).scalar_one()
         assert count >= 1
