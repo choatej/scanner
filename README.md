@@ -6,6 +6,7 @@ The project is at an early prototype stage:
 
 - ✅ Python package scaffolding with processing engine, registries, and domain models.
 - ✅ JSON ingestion pipeline with CLI (`scanner-ingest`) that reads structured metadata files and writes JSON Lines output.
+- ✅ PostgreSQL persistence backend (2-table schema) for normalized video metadata.
 - ✅ Tooling, tests, pre-commit hooks, and CI workflows.
 - 🚧 Upcoming milestones are tracked in `docs/roadmap.md`.
 
@@ -34,6 +35,12 @@ scripts/format.sh            # run black/isort
 scripts/lint.sh              # black/isort/flake8/mypy/bandit/import-linter
 pytest                       # run tests
 scanner-ingest --help        # CLI for ingesting JSON metadata into JSONL
+```
+
+To exercise the PostgreSQL backend locally:
+```bash
+export TEST_PG_DATABASE_URL="postgresql+psycopg://user:password@localhost:5432/scanner"
+pytest tests/test_postgres_persistence.py
 ```
 
 ### Continuous Integration

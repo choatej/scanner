@@ -8,7 +8,7 @@ This roadmap outlines the planned feature progression for Scanner. Each iteratio
 - Provide basic error handling, retry logic, and structured logging extensions.
 
 ## Milestone 2 — Relational Persistence
-- Introduce PostgreSQL 17 persistence backend with initial schema (sites, videos).
+- ✅ Introduce PostgreSQL 17 persistence backend with initial schema (sites, videos).
 - Add schema migration tooling and seed data support.
 - Provide basic querying utilities for testing/validation.
 

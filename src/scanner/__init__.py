@@ -35,13 +35,16 @@ from .infrastructure import (
     JsonFileSourceAdapter,
     JsonLinesPersistenceBackend,
     LoggingConfig,
+    PostgresPersistenceBackend,
     configure_file_logger,
     configure_stdout_and_file_logger,
     configure_stdout_logger,
     decode_dataclass,
     dump_dataclass_list,
+    ensure_pg_schema,
     get_function_logger,
     load_dataclass_list,
+    reset_pg_schema,
 )
 
 __all__ = [
@@ -80,4 +83,7 @@ __all__ = [
     "dump_dataclass_list",
     "load_dataclass_list",
     "JsonLinesPersistenceBackend",
+    "PostgresPersistenceBackend",
+    "ensure_pg_schema",
+    "reset_pg_schema",
 ]
