@@ -1,89 +1,73 @@
 # Scanner - A tool for scanning and cataloging videos on video sites.
 
-## Features
-- Gathers video meteadata from multiple sources
-  - web pages
-    - handles pagination
-    - Can process pages that require rendering (using selenium drivers)
-    - page types:
-      - search results
-      - category or tag matches
-      - actor pages
-  - local files (json, csv, html, structured records)
-  - other scanner instances
-- Collects high-level metadata about videos (when available)
-  - Title
-  - Decription
-  - Length (can read string formats, stores in seconds)
-  - Tags
-  - Categories
-  - Actors
-  - Source Site
-  - Extra Info
-- High-level consumer API for querying and seraching
-- Extensible to add new metadata fields, data sources, web page formats, backends.
+## Current Status
 
-## Design
-Losely coupled and modular, with strong API borders between
-- Processing Engine (the glue of the different parts)
-- Data source types
-- Data source reading (eg. different html page layouts)
-- backends (database, noSQL, files)
-- Query API output formats
-- Per-source config params
-  - rate limits
-  - timeouts
-  - process count
-- Onetime ingestion run vs. persistent service
-- startup CLI params, config file, env vars to determine behavior
-- Query API is a separate app from the backend.  Python API or stateful REPL.
-- User added extensions are auto loaded when stored in a well-known location or pointed to through config.
-- Structured logging with configurable destination. Default based on deployment context - system journal, stdout, etcx.
+The project is at an early prototype stage:
 
+- ✅ Python package scaffolding with processing engine, registries, and domain models.
+- ✅ JSON ingestion pipeline with CLI (`scanner-ingest`) that reads structured metadata files and writes JSON Lines output.
+- ✅ PostgreSQL persistence backend (2-table schema) for normalized video metadata.
+- ✅ Tooling, tests, pre-commit hooks, and CI workflows.
+- 🚧 Upcoming milestones are tracked in `docs/roadmap.md`.
 
+## Overview
 
-## Implementation
-- Stores data in a relational database for quick lookups
-- Suports full-text indexing across all text fields
-- Managed database schema migrations (forward-only)
-- API in both REST and GraphQL
+Scanner aims to ingest video metadata from multiple sources (web, local files, other scanners), normalize the data, and expose it through flexible APIs. The architecture is designed to be modular:
 
-## Tech Stack
+- Source adapters parse specific input formats.
+- Normalizers produce a canonical `VideoMetadata` representation.
+- Persistence backends store normalized records.
+- Output transformers and APIs present the data to consumers.
+
+## Development
+
+### Requirements
 - Python 3.12+
-- Postgres 17
-- Whatever else makes sense
+- uv (preferred for dependency management)
+- PostgreSQL 17 (for relational persistence)
 
-## Developing
+Development tooling is configured via `pyproject.toml` and includes `black`, `isort`, `flake8`, `mypy`, `pytest`, `bandit`, and `import-linter`.
 
-Code should have unit tests where it makes sense. There is no requirement for 100% coverage. Tests should cover the important and high-risk functionality.
+### Quick Start
+```bash
+scripts/bootstrap.sh         # create .venv and install deps
+scripts/format.sh            # run black/isort
+scripts/lint.sh              # black/isort/flake8/mypy/bandit/import-linter
+pytest                       # run tests
+scanner-ingest --help        # CLI for ingesting JSON metadata into JSONL
+```
 
-Any credentials persisted need to be secure - either read from a secure vault-like system or encrypted at rest.
+To exercise the PostgreSQL backend locally:
+```bash
+export TEST_PG_DATABASE_URL="postgresql+psycopg://user:password@localhost:5432/scanner"
+pytest tests/test_postgres_persistence.py
+```
 
+### Running with Docker Compose
 
-### Development Tools
-- uv
-- pytest
-- mypy
-- import linter
-- black
-- bandit
-- flake8
+Docker resources live at the repository root (`Dockerfile`, `docker-compose.yml`). The default compose stack includes:
 
+- `postgres`: PostgreSQL 17 instance.
+- `scanner`: containerized CLI that ingests the sample metadata in `tests/fixtures/video_metadata.json` into Postgres.
 
-# Continuous Integration
-- GitHub pull request creation and updates will trigger a run of all static analysis and tests. It will also create a docker container and push it to ghcr.io.
-- Merges to main will trigger a release creating all deployment artifacts.
--
+```bash
+docker compose up --build scanner
+```
 
-## Deployment
-Scripts are provided to run Scanner
-- Directly from code
-- as a systemd service
-- As a package (debian, arch, appimage)
-- As a docker container (database and other components not included)
-- As a GCP compute instance or cloud run
-- Python wheel for the consumer API
+To ingest different metadata files, mount them and override the command:
 
+```bash
+docker compose run --rm \
+  -v "$(pwd)/my_data:/data" \
+  scanner \
+  --metadata-file /data/custom.json \
+  --persistence-backend postgres
+```
 
-## Legal
-This software is release under the MIT License.  See [LICENSE](LICENSE) for the terms and conditions.
+### Continuous Integration
+
+GitHub Actions run linting and tests on pull requests and merges to `main`. Branch protection requires passing CI, at least one review (including Copilot suggestions), and all conversations resolved before merging.
+
+## License
+
+This software is released under the MIT License. See [LICENSE](LICENSE) for details.

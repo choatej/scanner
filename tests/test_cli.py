@@ -48,3 +48,19 @@ def test_cli_ingests_metadata(tmp_path: Path, monkeypatch: MonkeyPatch) -> None:
     contents = output.read_text(encoding="utf-8").strip().splitlines()
     assert contents
     assert "CLI Video" in contents[0]
+
+
+def test_cli_requires_output_for_json(tmp_path: Path) -> None:
+    metadata = tmp_path / "input.json"
+    create_metadata_file(metadata)
+
+    exit_code = cli_main(
+        [
+            "--metadata-file",
+            str(metadata),
+            "--log-level",
+            "ERROR",
+        ]
+    )
+
+    assert exit_code == 1

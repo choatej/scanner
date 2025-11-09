@@ -22,6 +22,7 @@ _Last updated: 2025-11-08_
 - **Logging strategy**: `scanner.infrastructure.logging_config` provides consistent stdout/file logger setup mirroring lessons from earlier projects; the engine accepts a logger for observability.
 - **Local JSON ingestion**: `JsonFileSourceAdapter` and `VideoMetadataNormalizer` load structured metadata from disk using dataclass-aware codecs.
 - **File persistence**: `JsonLinesPersistenceBackend` appends normalized payloads to JSON Lines files for inspection or downstream ingestion.
+- **Relational persistence**: `PostgresPersistenceBackend` stores metadata in PostgreSQL tables (`sites`, `videos`) with automatic schema management.
 - **CLI workflow**: `scanner.api.cli` offers a simple command for executing the ingestion pipeline end-to-end.
 
 ## Tooling and Standards

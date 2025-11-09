@@ -14,6 +14,11 @@ from .logging_config import (
     get_function_logger,
 )
 from .persistence.jsonl import JsonLinesPersistenceBackend
+from .persistence.postgres import (
+    PostgresPersistenceBackend,
+    ensure_schema as ensure_pg_schema,
+    reset_schema as reset_pg_schema,
+)
 from .sources.json_file import JsonFileSourceAdapter
 
 __all__ = [
@@ -28,4 +33,7 @@ __all__ = [
     "load_dataclass_list",
     "JsonFileSourceAdapter",
     "JsonLinesPersistenceBackend",
+    "PostgresPersistenceBackend",
+    "ensure_pg_schema",
+    "reset_pg_schema",
 ]
