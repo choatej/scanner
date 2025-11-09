@@ -24,6 +24,7 @@ _Last updated: 2025-11-08_
 - **File persistence**: `JsonLinesPersistenceBackend` appends normalized payloads to JSON Lines files for inspection or downstream ingestion.
 - **Relational persistence**: `PostgresPersistenceBackend` stores metadata in PostgreSQL tables (`sites`, `videos`) with automatic schema management.
 - **HTML ingestion**: `HtmlPageSourceAdapter` orchestrates fetchers (requests/Selenium) and DOM parsing (BeautifulSoup) with configurable CSS selectors and field mappings.
+- **Configuration management**: `scanner.config` loads TOML configuration defaults (default `/etc/scanner/config.toml`) with CLI/env overrides for deployment flexibility.
 - **CLI workflow**: `scanner.api.cli` offers a simple command for executing the ingestion pipeline end-to-end.
 - **Async pipeline**: `AsyncProcessingEngine` enables concurrent ingestion with asyncio semantics, with `run_pipeline` for multi-request orchestration.
 

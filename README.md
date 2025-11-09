@@ -59,6 +59,23 @@ scanner-ingest \
   --database-url postgresql+psycopg://scanner:scanner@localhost:5432/scanner
 ```
 
+### Configuration
+
+Scanner reads defaults from a TOML configuration file (default location `/etc/scanner/config.toml`). A sample config is provided in `config/example.toml`.
+
+```bash
+scanner-ingest \
+  --config /etc/scanner/config.toml \
+  --log-level INFO
+```
+
+CLI options and environment variables override file values:
+
+- `--metadata-file`, `--source-adapter`, `--source-config` override `[source]` values.
+- `--persistence-backend`, `--output-file`, `--database-url` override `[persistence]` values (with `DATABASE_URL` as a fallback).
+
+If the specified config file cannot be read and required options are not supplied via CLI or environment variables, the process exits with an error.
+
 ### Async Pipeline
 
 The ingestion engine now runs asynchronously. The CLI leverages this under the hood, but you can also orchestrate multiple requests programmatically:

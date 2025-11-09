@@ -16,7 +16,11 @@ _This document summarizes key interactions between the user and GPT-5 Codex duri
 - Introduced PostgreSQL persistence backend (with schema helpers) and documented roadmap for future milestones.
 - Added Dockerfile and docker-compose stack to orchestrate Scanner alongside PostgreSQL.
 - Implemented HTML ingestion pipeline (requests/Selenium fetchers, BeautifulSoup DOM adapter, configurable field extraction) with fixtures and tests.
-- Added TOML-driven configuration system with CLI/environment overrides and sample configuration.
+<<<<<<< HEAD
+- Added TOML-driven configuration system with CLI/environment overrides and sample configuration to simplify deployment.
 - Introduced asynchronous ingestion engine and pipeline helpers to support concurrent processing.
+=======
+- Added TOML-driven configuration system with CLI/environment overrides and sample configuration to simplify deployment.
+>>>>>>> main
 
 Additional entries will be added as new discussions influence implementation decisions.
