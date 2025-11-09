@@ -1,6 +1,7 @@
 """Scanner package."""
 
 from .domain import (
+    HTML_PAGE_STRUCTURE,
     VIDEO_METADATA_JSON_STRUCTURE,
     NormalizedMetadataTransformer,
     VideoMetadataNormalizer,
@@ -70,6 +71,7 @@ __all__ = [
     "SourceStructure",
     "SourceType",
     "VideoMetadata",
+    "HTML_PAGE_STRUCTURE",
     "VIDEO_METADATA_JSON_STRUCTURE",
     "VideoMetadataNormalizer",
     "NormalizedMetadataTransformer",
