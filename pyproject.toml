@@ -22,7 +22,6 @@ classifiers = [
 ]
 keywords = ["scanner", "metadata", "videos"]
 dependencies = [
-    "mypy>=1.18.2",
     "requests>=2.32.3",
     "beautifulsoup4>=4.12.3",
     "lxml>=5.2.1",

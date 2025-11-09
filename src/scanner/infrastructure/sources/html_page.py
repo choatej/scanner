@@ -54,6 +54,8 @@ class HtmlPageSourceAdapter(SourceAdapter):
                     "start_urls",
                     "item_selector",
                     "fields",
+                    "extra_fields",
+                    "site",
                     "fetcher",
                     "parser",
                 ]
@@ -130,7 +132,9 @@ def _extract_payload(
         elif field in {"tags", "categories", "actors"}:
             payload[field] = value or []
         elif field == "length_seconds" and value:
-            payload[field] = _parse_length(value)
+            parsed = _parse_length(value)
+            if parsed is not None:
+                payload[field] = parsed
         else:
             if value is not None:
                 payload[field] = value
