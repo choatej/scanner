@@ -2,5 +2,10 @@
 
 from .constants import VIDEO_METADATA_JSON_STRUCTURE
 from .normalizers import VideoMetadataNormalizer
+from .transformers import NormalizedMetadataTransformer
 
-__all__ = ["VIDEO_METADATA_JSON_STRUCTURE", "VideoMetadataNormalizer"]
+__all__ = [
+    "VIDEO_METADATA_JSON_STRUCTURE",
+    "VideoMetadataNormalizer",
+    "NormalizedMetadataTransformer",
+]

@@ -24,7 +24,6 @@ def decode_dataclass(data: Mapping[str, Any], cls: Type[T]) -> T:
 
     if not isinstance(data, Mapping):
         raise TypeError(f"Expected mapping to decode {cls.__name__}, got {type(data).__name__}")
-
     if not is_dataclass(cls):
         raise TypeError(f"{cls!r} is not a dataclass type")
 

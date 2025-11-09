@@ -1,6 +1,10 @@
 """Scanner package."""
 
-from .domain import VIDEO_METADATA_JSON_STRUCTURE, VideoMetadataNormalizer
+from .domain import (
+    VIDEO_METADATA_JSON_STRUCTURE,
+    NormalizedMetadataTransformer,
+    VideoMetadataNormalizer,
+)
 from .domain.engine import (
     ListFailureAggregator,
     NormalizerRegistry,
@@ -29,6 +33,7 @@ from .domain.models import (
 from .infrastructure import (
     DataclassJSONEncoder,
     JsonFileSourceAdapter,
+    JsonLinesPersistenceBackend,
     LoggingConfig,
     configure_file_logger,
     configure_stdout_and_file_logger,
@@ -63,6 +68,7 @@ __all__ = [
     "VideoMetadata",
     "VIDEO_METADATA_JSON_STRUCTURE",
     "VideoMetadataNormalizer",
+    "NormalizedMetadataTransformer",
     "LoggingConfig",
     "configure_stdout_logger",
     "configure_file_logger",
@@ -73,4 +79,5 @@ __all__ = [
     "decode_dataclass",
     "dump_dataclass_list",
     "load_dataclass_list",
+    "JsonLinesPersistenceBackend",
 ]

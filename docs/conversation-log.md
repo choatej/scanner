@@ -12,5 +12,6 @@ _This document summarizes key interactions between the user and GPT-5 Codex duri
 - Introduced reusable logging utilities in `scanner.infrastructure.logging_config`, integrated structured logging into the processing engine, and validated helpers with targeted tests.
 - Added local pre-commit integration (running `scripts/lint-fix.sh`) and configured GitHub Actions CI to execute linting and test suites on key events.
 - Built JSON ingestion utilities (`json_codec`, `JsonFileSourceAdapter`, `VideoMetadataNormalizer`) with fixtures and engine integration tests.
+- Added JSON Lines persistence backend and CLI command to demonstrate end-to-end ingestion with accompanying tests.
 
 Additional entries will be added as new discussions influence implementation decisions.

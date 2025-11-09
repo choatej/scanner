@@ -89,7 +89,7 @@ class PersistenceDescriptor:
     """Configuration describing where processed output should be stored."""
 
     backend: PersistenceBackendType
-    target: str
+    target: str | None = None
     configuration: Mapping[str, Any] = field(default_factory=dict)
 
     def get(self, key: str, default: Optional[Any] = None) -> Any:
