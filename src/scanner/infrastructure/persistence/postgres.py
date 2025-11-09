@@ -85,7 +85,7 @@ class PostgresPersistenceBackend(PersistenceBackend):
         return PersistenceResult(stored_count=stored)
 
     def _resolve_url(self, descriptor: PersistenceDescriptor) -> str | None:
-        configured = descriptor.get(self.CONFIG_URL_KEY)
+        configured = descriptor.configuration.get(self.CONFIG_URL_KEY)
         target = descriptor.target
         return configured or target
 
