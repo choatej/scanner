@@ -1,5 +1,6 @@
 """Scanner package."""
 
+from .domain import VIDEO_METADATA_JSON_STRUCTURE, VideoMetadataNormalizer
 from .domain.engine import (
     ListFailureAggregator,
     NormalizerRegistry,
@@ -60,6 +61,8 @@ __all__ = [
     "SourceStructure",
     "SourceType",
     "VideoMetadata",
+    "VIDEO_METADATA_JSON_STRUCTURE",
+    "VideoMetadataNormalizer",
     "LoggingConfig",
     "configure_stdout_logger",
     "configure_file_logger",
