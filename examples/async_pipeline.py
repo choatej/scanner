@@ -4,12 +4,12 @@ import asyncio
 from pathlib import Path
 
 from scanner import (
+    VIDEO_METADATA_JSON_STRUCTURE,
     AsyncProcessingEngine,
     JsonFileSourceAdapter,
     JsonLinesPersistenceBackend,
     NormalizedMetadataTransformer,
     ProcessingRequest,
-    VIDEO_METADATA_JSON_STRUCTURE,
     VideoMetadataNormalizer,
 )
 from scanner.domain.engine import NormalizerRegistry, OutputRegistry, PersistenceRegistry, SourceRegistry
@@ -62,4 +62,3 @@ async def main() -> None:
 
 if __name__ == "__main__":
     asyncio.run(main())
-
