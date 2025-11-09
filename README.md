@@ -24,7 +24,7 @@ Scanner aims to ingest video metadata from multiple sources (web, local files, o
 ### Requirements
 - Python 3.12+
 - uv (preferred for dependency management)
-- Postgres 17 (planned persistence backend)
+- PostgreSQL 17 (for relational persistence)
 
 Development tooling is configured via `pyproject.toml` and includes `black`, `isort`, `flake8`, `mypy`, `pytest`, `bandit`, and `import-linter`.
 
