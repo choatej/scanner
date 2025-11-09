@@ -1,6 +1,7 @@
 """Scanner package."""
 
 from .domain import (
+    HTML_PAGE_STRUCTURE,
     VIDEO_METADATA_JSON_STRUCTURE,
     NormalizedMetadataTransformer,
     VideoMetadataNormalizer,
@@ -47,6 +48,7 @@ from .infrastructure import (
     load_dataclass_list,
     reset_pg_schema,
 )
+from .pipeline import AsyncProcessingEngine, run_pipeline
 
 __all__ = [
     "IngestionRecord",
@@ -70,6 +72,7 @@ __all__ = [
     "SourceStructure",
     "SourceType",
     "VideoMetadata",
+    "HTML_PAGE_STRUCTURE",
     "VIDEO_METADATA_JSON_STRUCTURE",
     "VideoMetadataNormalizer",
     "NormalizedMetadataTransformer",
@@ -88,4 +91,6 @@ __all__ = [
     "PostgresPersistenceBackend",
     "ensure_pg_schema",
     "reset_pg_schema",
+    "AsyncProcessingEngine",
+    "run_pipeline",
 ]

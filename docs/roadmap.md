@@ -4,6 +4,8 @@ This roadmap outlines the planned feature progression for Scanner. Each iteratio
 
 ## Milestone 1 — Web Ingestion Pipeline
 - ✅ Implement HTML/scraper-based source adapters (static pages, optional Selenium rendering).
+- ✅ Add configuration management foundation (TOML defaults, CLI/env overrides).
+- ✅ Introduce asynchronous pipeline engine and CLI integration.
 - Add configuration for source-specific parameters (rate limits, pagination).
 - Provide basic error handling, retry logic, and structured logging extensions.
 

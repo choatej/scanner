@@ -8,6 +8,7 @@ The project is at an early prototype stage:
 - ✅ JSON ingestion pipeline with CLI (`scanner-ingest`) that reads structured metadata files and writes JSON Lines output.
 - ✅ PostgreSQL persistence backend (2-table schema) for normalized video metadata.
 - ✅ HTML ingestion adapter (requests/BeautifulSoup with optional Selenium) driven by configuration.
+- ✅ Async ingestion pipeline capable of processing multiple locators concurrently.
 - ✅ Tooling, tests, pre-commit hooks, and CI workflows.
 - 🚧 Upcoming milestones are tracked in `docs/roadmap.md`.
 
@@ -56,6 +57,62 @@ scanner-ingest \
   --metadata-file https://example.com/videos \
   --persistence-backend postgres \
   --database-url postgresql+psycopg://scanner:scanner@localhost:5432/scanner
+```
+
+### Async Pipeline
+
+The ingestion engine now runs asynchronously. The CLI leverages this under the hood, but you can also orchestrate multiple requests programmatically:
+
+```python
+import asyncio
+
+from scanner import (
+    AsyncProcessingEngine,
+    JsonFileSourceAdapter,
+    JsonLinesPersistenceBackend,
+    NormalizedMetadataTransformer,
+    ProcessingRequest,
+    VIDEO_METADATA_JSON_STRUCTURE,
+    SourceDescriptor,
+    SourceRegistry,
+    PersistenceRegistry,
+    NormalizerRegistry,
+    OutputRegistry,
+    VideoMetadataNormalizer,
+)
+from scanner.pipeline import run_pipeline
+from scanner.domain.models import (
+    OutputDescriptor,
+    OutputFormat,
+    PersistenceBackendType,
+    PersistenceDescriptor,
+    SourceType,
+)
+
+engine = AsyncProcessingEngine(
+    source_registry=SourceRegistry(adapters=[JsonFileSourceAdapter()]),
+    normalizer_registry=NormalizerRegistry(normalizers=[VideoMetadataNormalizer()]),
+    output_registry=OutputRegistry(transformers=[NormalizedMetadataTransformer()]),
+    persistence_registry=PersistenceRegistry(backends=[JsonLinesPersistenceBackend()]),
+)
+
+requests = [
+    ProcessingRequest(
+        source=SourceDescriptor(
+            identifier="example",
+            source_type=SourceType.FILE,
+            structure_id=VIDEO_METADATA_JSON_STRUCTURE,
+            configuration={"path": "/data/one.json"},
+        ),
+        output=OutputDescriptor(format=OutputFormat.NORMALIZED_METADATA),
+        persistence=PersistenceDescriptor(
+            backend=PersistenceBackendType.FILE_SYSTEM,
+            configuration={"path": "/tmp/out.jsonl"},
+        ),
+    )
+]
+
+asyncio.run(run_pipeline(engine, requests))
 ```
 
 ### Running with Docker Compose

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
 import logging
 import os
 import sys
@@ -16,7 +17,6 @@ from .. import (
     LoggingConfig,
     NormalizedMetadataTransformer,
     PostgresPersistenceBackend,
-    ProcessingEngine,
     ProcessingRequest,
     VideoMetadataNormalizer,
 )
@@ -31,6 +31,7 @@ from ..domain.models import (
     SourceType,
 )
 from ..infrastructure.logging_config import configure_stdout_logger
+from ..pipeline import AsyncProcessingEngine
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -102,14 +103,14 @@ def create_engine(
     backend: str,
     database_url: str | None,
     logger: logging.Logger | None = None,
-) -> ProcessingEngine:
+) -> AsyncProcessingEngine:
     persistence_backends: list[PersistenceBackendInterface] = [JsonLinesPersistenceBackend()]
     if backend == "postgres":
         if not database_url:
             raise ValueError("PostgreSQL backend requires --database-url or DATABASE_URL environment variable")
         persistence_backends.append(PostgresPersistenceBackend())
 
-    return ProcessingEngine(
+    return AsyncProcessingEngine(
         source_registry=SourceRegistry(adapters=[JsonFileSourceAdapter()]),
         normalizer_registry=NormalizerRegistry(normalizers=[VideoMetadataNormalizer()]),
         output_registry=OutputRegistry(transformers=[NormalizedMetadataTransformer()]),
@@ -137,7 +138,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     except ValueError as exc:
         logger.error("%s", exc)
         return 1
-    report = engine.process(request)
+    report = asyncio.run(engine.process_async(request))
     logger.info(
         "Ingestion complete",
         extra={

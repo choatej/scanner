@@ -19,6 +19,7 @@ _Last updated: 2025-11-08_
 - `src/scanner/infrastructure/persistence/jsonl.py`: Persistence backend writing JSON Lines output.
 - `src/scanner/infrastructure/persistence/postgres.py`: PostgreSQL backend with `sites`/`videos` tables and schema helpers.
 - `src/scanner/api/cli.py`: Lightweight CLI entrypoint for ingesting a JSON file into JSONL output.
+- `src/scanner/pipeline/async_engine.py`: Async orchestration layer and helpers for concurrent ingestion.
 - `tests/`: Test suite root with package initialization.
 - `tests/test_processing_engine.py`: Validates registry resolution, orchestration flow, and error handling.
 - `tests/test_logging_config.py`: Exercises logging helper utilities.
@@ -28,6 +29,7 @@ _Last updated: 2025-11-08_
 - `tests/test_jsonl_persistence.py`: Ensures JSON Lines persistence backend writes expected data.
 - `tests/test_cli.py`: Runs the CLI end-to-end against fixture metadata.
 - `tests/test_postgres_persistence.py`: Integration test for the PostgreSQL backend (requires `TEST_PG_DATABASE_URL`).
+- `tests/test_async_engine.py`: Validates the async processing engine and pipeline helper.
 - `scripts/`: Development helper scripts (`bootstrap.sh`, `activate.sh`, `lint.sh`, `format.sh`).
 - `.pre-commit-config.yaml`: Local hook configuration running `scripts/lint-fix.sh` alongside basic hygiene checks.
 - `.github/workflows/ci.yml`: Continuous integration pipeline executing the full lint and test suite on PRs, pushes to `main`, and manual dispatch.

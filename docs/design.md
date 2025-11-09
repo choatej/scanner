@@ -25,6 +25,7 @@ _Last updated: 2025-11-08_
 - **Relational persistence**: `PostgresPersistenceBackend` stores metadata in PostgreSQL tables (`sites`, `videos`) with automatic schema management.
 - **HTML ingestion**: `HtmlPageSourceAdapter` orchestrates fetchers (requests/Selenium) and DOM parsing (BeautifulSoup) with configurable CSS selectors and field mappings.
 - **CLI workflow**: `scanner.api.cli` offers a simple command for executing the ingestion pipeline end-to-end.
+- **Async pipeline**: `AsyncProcessingEngine` enables concurrent ingestion with asyncio semantics, with `run_pipeline` for multi-request orchestration.
 
 ## Tooling and Standards
 - Python 3.12 base runtime with virtual environment managed locally at `.venv/`.
