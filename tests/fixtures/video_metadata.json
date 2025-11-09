@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Example Video",
+    "description": "An example description.",
+    "length_seconds": 120,
+    "tags": ["example", "test"],
+    "categories": ["demo"],
+    "actors": ["Actor One"],
+    "source_site": "example.com",
+    "extra": {"quality": "1080p"}
+  },
+  {
+    "title": "Second Video",
+    "description": null,
+    "length_seconds": 45,
+    "tags": [],
+    "categories": [],
+    "actors": [],
+    "source_site": "example.com",
+    "extra": {}
+  }
+]

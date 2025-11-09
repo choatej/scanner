@@ -1,4 +1,4 @@
-"""Concrete normalizers for processing engine."""
+"""Concrete normalizers for converting source records into domain models."""
 
 from __future__ import annotations
 
@@ -10,24 +10,24 @@ from .models import IngestionRecord, SourceDescriptor, SourceRecord, VideoMetada
 
 
 class VideoMetadataNormalizer(Normalizer):
-    """Normalize raw source records into ``VideoMetadata`` instances."""
+    """Normalize raw records representing ``VideoMetadata``."""
 
     def supports(self, descriptor: SourceDescriptor) -> bool:
         return descriptor.structure_id == VIDEO_METADATA_JSON_STRUCTURE
 
     def normalize(self, record: SourceRecord) -> IngestionRecord:
-        metadata = _build_metadata(record)
+        metadata = _extract_metadata(record)
         return IngestionRecord(metadata=metadata, source_record=record)
 
 
-def _build_metadata(record: SourceRecord) -> VideoMetadata:
+def _extract_metadata(record: SourceRecord) -> VideoMetadata:
     context_value: Any | None = record.context.get("metadata")
     if isinstance(context_value, VideoMetadata):
         return context_value
 
     try:
         return VideoMetadata(**record.payload)
-    except TypeError as exc:  # noqa: BLE001
+    except TypeError as exc:
         raise ValueError("Record payload is not compatible with VideoMetadata") from exc
 
 

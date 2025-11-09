@@ -74,10 +74,10 @@ __all__ = [
     "configure_file_logger",
     "configure_stdout_and_file_logger",
     "get_function_logger",
+    "JsonFileSourceAdapter",
     "DataclassJSONEncoder",
     "decode_dataclass",
     "dump_dataclass_list",
     "load_dataclass_list",
-    "JsonFileSourceAdapter",
     "JsonLinesPersistenceBackend",
 ]

@@ -20,7 +20,7 @@ _Last updated: 2025-11-08_
 - **Persistence backend**: `PersistenceDescriptor` paired with `PersistenceBackend` interfaces route payloads to storage layers (files, databases, queues, remote APIs).
 - **Processing engine orchestration**: `ProcessingEngine` coordinates registries for source adapters, normalizers, transformers, and persistence backends, capturing failures via a pluggable aggregator.
 - **Logging strategy**: `scanner.infrastructure.logging_config` provides consistent stdout/file logger setup mirroring lessons from earlier projects; the engine accepts a logger for observability.
-- **Local JSON ingestion**: `JsonFileSourceAdapter` coupled with `VideoMetadataNormalizer` loads structured metadata from disk using dataclass-aware codecs.
+- **Local JSON ingestion**: `JsonFileSourceAdapter` and `VideoMetadataNormalizer` load structured metadata from disk using dataclass-aware codecs.
 - **File persistence**: `JsonLinesPersistenceBackend` appends normalized payloads to JSON Lines files for inspection or downstream ingestion.
 - **CLI workflow**: `scanner.api.cli` offers a simple command for executing the ingestion pipeline end-to-end.
 

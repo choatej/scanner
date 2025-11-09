@@ -13,7 +13,7 @@ T = TypeVar("T")
 class DataclassJSONEncoder(json.JSONEncoder):
     """JSON encoder that can serialize dataclass instances."""
 
-    def default(self, obj: Any) -> Any:  # noqa: D401
+    def default(self, obj: Any) -> Any:  # noqa: D401 - short override docstring
         if is_dataclass(obj) and not isinstance(obj, type):
             return asdict(obj)
         return super().default(obj)
@@ -44,12 +44,7 @@ def load_dataclass_list(path: Path, cls: Type[T]) -> list[T]:
 def dump_dataclass_list(path: Path, items: Sequence[T]) -> None:
     """Write a list of dataclasses to ``path``."""
 
-    serializable: list[Any] = []
-    for item in items:
-        if is_dataclass(item) and not isinstance(item, type):
-            serializable.append(asdict(item))
-        else:
-            serializable.append(item)
+    serializable = list(items)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(serializable, indent=2, cls=DataclassJSONEncoder), encoding="utf-8")
 
