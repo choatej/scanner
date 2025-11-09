@@ -27,6 +27,7 @@ from ..domain.models import (
     SourceRecord,
 )
 
+
 class AsyncProcessingEngine:
     """Coordinate ingestion asynchronously using asyncio primitives."""
 
@@ -149,6 +150,7 @@ class AsyncProcessingEngine:
                 except Exception as exc:  # noqa: BLE001
                     aggregator.record(f"Normalization failure: {exc}")
             return normalized
+
         return await asyncio.to_thread(_normalize)
 
     async def _transform_async(
