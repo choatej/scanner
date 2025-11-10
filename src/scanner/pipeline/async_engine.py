@@ -108,7 +108,12 @@ class AsyncProcessingEngine:
     ) -> list[ProcessingReport]:
         """Process multiple requests concurrently with optional concurrency control."""
 
-        semaphore = asyncio.Semaphore(concurrency) if concurrency else None
+        if concurrency is not None:
+            if concurrency <= 0:
+                raise ValueError("concurrency must be a positive integer")
+            semaphore = asyncio.Semaphore(concurrency)
+        else:
+            semaphore = None
 
         async def _run(req: ProcessingRequest) -> ProcessingReport:
             if semaphore:
