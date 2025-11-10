@@ -26,6 +26,7 @@ _Last updated: 2025-11-08_
 - **HTML ingestion**: `HtmlPageSourceAdapter` orchestrates fetchers (requests/Selenium) and DOM parsing (BeautifulSoup) with configurable CSS selectors and field mappings.
 - **Configuration management**: `scanner.config` loads TOML configuration defaults (default `/etc/scanner/config.toml`) with CLI/env overrides for deployment flexibility.
 - **CLI workflow**: `scanner.api.cli` offers a simple command for executing the ingestion pipeline end-to-end.
+- **Async pipeline**: `AsyncProcessingEngine` enables concurrent ingestion with asyncio semantics, with `run_pipeline` for multi-request orchestration.
 
 ## Tooling and Standards
 - Python 3.12 base runtime with virtual environment managed locally at `.venv/`.

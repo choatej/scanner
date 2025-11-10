@@ -48,6 +48,7 @@ from .infrastructure import (
     load_dataclass_list,
     reset_pg_schema,
 )
+from .pipeline import AsyncProcessingEngine, run_pipeline
 
 __all__ = [
     "IngestionRecord",
@@ -90,4 +91,6 @@ __all__ = [
     "PostgresPersistenceBackend",
     "ensure_pg_schema",
     "reset_pg_schema",
+    "AsyncProcessingEngine",
+    "run_pipeline",
 ]

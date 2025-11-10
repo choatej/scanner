@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
 import logging
 import os
 import sys
@@ -20,7 +21,6 @@ from .. import (
     LoggingConfig,
     NormalizedMetadataTransformer,
     PostgresPersistenceBackend,
-    ProcessingEngine,
     ProcessingRequest,
     VideoMetadataNormalizer,
 )
@@ -42,6 +42,7 @@ from ..domain.models import (
     SourceType,
 )
 from ..infrastructure.logging_config import configure_stdout_logger
+from ..pipeline import AsyncProcessingEngine
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -110,7 +111,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     engine = _create_engine(logger=logger)
     request = create_processing_request(merged.source_descriptor, merged.persistence_descriptor)
-    report = engine.process(request)
+    report = asyncio.run(engine.process_async(request))
     return _report(logger, report)
 
 
@@ -222,8 +223,8 @@ def _build_persistence_descriptor(backend: str, configuration: Mapping[str, obje
     raise ConfigError(f"Unknown persistence backend '{backend}'")
 
 
-def _create_engine(logger: logging.Logger | None = None) -> ProcessingEngine:
-    return ProcessingEngine(
+def _create_engine(logger: logging.Logger | None = None) -> AsyncProcessingEngine:
+    return AsyncProcessingEngine(
         source_registry=SourceRegistry(adapters=[JsonFileSourceAdapter(), HtmlPageSourceAdapter()]),
         normalizer_registry=NormalizerRegistry(normalizers=[VideoMetadataNormalizer()]),
         output_registry=OutputRegistry(transformers=[NormalizedMetadataTransformer()]),

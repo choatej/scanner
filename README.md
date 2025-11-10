@@ -8,6 +8,7 @@ The project is at an early prototype stage:
 - ✅ JSON ingestion pipeline with CLI (`scanner-ingest`) that reads structured metadata files and writes JSON Lines output.
 - ✅ PostgreSQL persistence backend (2-table schema) for normalized video metadata.
 - ✅ HTML ingestion adapter (requests/BeautifulSoup with optional Selenium) driven by configuration.
+- ✅ Async ingestion pipeline capable of processing multiple locators concurrently.
 - ✅ Tooling, tests, pre-commit hooks, and CI workflows.
 - 🚧 Upcoming milestones are tracked in `docs/roadmap.md`.
 
